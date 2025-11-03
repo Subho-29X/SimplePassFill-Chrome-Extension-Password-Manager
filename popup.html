@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SimplePassFill</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1>🔒 SimplePassFill</h1>
+        <div class="status">
+          <span id="lockStatus" class="status-locked">Locked</span>
+        </div>
+      </div>
+
+      <!-- Setup Master Password (shown when no master password is set) -->
+      <div id="setupSection" class="section hidden">
+        <h2>Setup Master Password</h2>
+        <p class="info">Create a master password to secure your vault.</p>
+        <form id="setupForm">
+          <div class="input-group">
+            <input
+              type="password"
+              id="setupPassword"
+              placeholder="Enter master password"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirm password"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Create Vault</button>
+        </form>
+      </div>
+
+      <!-- Unlock Vault (shown when vault is locked) -->
+      <div id="unlockSection" class="section hidden">
+        <h2>Unlock Vault</h2>
+        <form id="unlockForm">
+          <div class="input-group">
+            <input
+              type="password"
+              id="unlockPassword"
+              placeholder="Enter master password"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Unlock</button>
+        </form>
+        <div id="unlockError" class="error hidden">Incorrect password</div>
+      </div>
+
+      <!-- Main Interface (shown when vault is unlocked) -->
+      <div id="mainSection" class="section hidden">
+        <!-- Lock Button -->
+        <div class="actions">
+          <button id="lockBtn" class="btn btn-secondary">Lock Vault</button>
+        </div>
+
+        <!-- Add Credential Form -->
+        <div class="add-credential">
+          <h3>Add New Credential</h3>
+          <form id="addCredentialForm">
+            <div class="input-group">
+              <label for="siteOrigin">Website</label>
+              <input
+                type="url"
+                id="siteOrigin"
+                placeholder="https://example.com"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Enter username"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-success">
+              Add Credential
+            </button>
+          </form>
+        </div>
+
+        <!-- Current Site Auto-fill -->
+        <div id="currentSiteSection" class="current-site hidden">
+          <h3>Current Site</h3>
+          <div class="site-info">
+            <span id="currentSiteUrl"></span>
+            <button id="fillCurrentSite" class="btn btn-primary">
+              Fill Login
+            </button>
+          </div>
+        </div>
+
+        <!-- Saved Credentials List -->
+        <div class="credentials-list">
+          <h3>Saved Credentials</h3>
+          <div id="credentialsList" class="list">
+            <!-- Credentials will be populated here -->
+          </div>
+          <div id="noCredentials" class="empty-state hidden">
+            No credentials saved yet
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading indicator -->
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <span>Loading...</span>
+      </div>
+
+      <!-- Success/Error Messages -->
+      <div id="message" class="message hidden">
+        <span id="messageText"></span>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
